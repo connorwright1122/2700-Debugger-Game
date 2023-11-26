@@ -94,7 +94,7 @@ public class PlayerController2 : MonoBehaviour {
 
 
         if (Input.GetKeyDown(KeyCode.T)) {
-            menuPanel.SetActive(true); // Show the menu
+            //menuPanel.SetActive(true); // Show the menu
             inputField.GetComponent<TMP_InputField>().Select(); // Focus the text field
             Time.timeScale = 0f; // Freeze the game
             frozen = true;
@@ -138,7 +138,9 @@ public class PlayerController2 : MonoBehaviour {
             Debug.Log("Invalid weapon selection: " + inputText);
         }
 
-        menuPanel.SetActive(false); // Hide the menu
+        //menuPanel.SetActive(false); // Hide the menu
+        inputField.GetComponent<TMP_InputField>().DeactivateInputField();
+        //EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f; // Unfreeze the game
         frozen = false;
     }

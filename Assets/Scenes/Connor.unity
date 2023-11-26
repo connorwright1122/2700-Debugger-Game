@@ -346,7 +346,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: Press 't' to edit...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1513,8 +1513,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5860627, z: 1}
-  m_Center: {x: 0, y: 0.02358833, z: 0}
+  m_Size: {x: 2.903789, y: 1.5860627, z: 1}
+  m_Center: {x: 0.24791485, y: 0.0235883, z: 0}
 --- !u!114 &1991692129
 MonoBehaviour:
   m_ObjectHideFlags: 0
