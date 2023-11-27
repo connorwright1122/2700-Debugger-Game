@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     private float health;
     private float lerpTimer;
+    private LogicScript logic;
     public float maxHealth = 100f;
     public float chipSpeed = 2f;
     public Image frontHealthBar;
@@ -14,7 +16,16 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    
         health = maxHealth;
+        GameObject logicGameObject = GameObject.FindWithTag("Logic");
+        if (logicGameObject == null)
+        {
+            Debug.Log("The logic game object tag cant be found");
+        }
+
+        // Get the LogicScript component attached to the "Logic" GameObject
+        logic = logicGameObject.GetComponent<LogicScript>();
     }
 
     // Update is called once per frame
@@ -25,6 +36,12 @@ public class PlayerHealth : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             TakeDamage(Random.Range(5, 10));
+        }
+        
+        if (health == 0)
+        {
+            Debug.Log("health is 0");
+            logic.GameOver();
         }
     }
     public void UpdateHealthUI() 
@@ -46,5 +63,10 @@ public class PlayerHealth : MonoBehaviour
     {
         health -= damage;
         lerpTimer = 0f;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
