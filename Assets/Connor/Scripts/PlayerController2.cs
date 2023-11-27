@@ -110,10 +110,14 @@ public class PlayerController2 : MonoBehaviour {
         if (Physics.Raycast(ray, out hit)) {
             Debug.Log("hit " + hit.transform.name);
 
+            GameObject particleSystem = Instantiate(particleSystemPrefab, hit.point, Quaternion.identity);
+            Destroy(particleSystem, 2.0f); // Destroy the particle system after 2 seconds
+
             if (hit.transform.tag == "Enemy") {
                 hit.transform.gameObject.GetComponent<EnemyHealthManager>().takeDamage(shootDamage);
-                GameObject particleSystem = Instantiate(particleSystemPrefab, hit.point, Quaternion.identity);
-                Destroy(particleSystem, 2.0f); // Destroy the particle system after 2 seconds
+                
+
+                //Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
 
             }
         }
