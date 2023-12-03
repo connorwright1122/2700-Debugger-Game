@@ -57,13 +57,13 @@ public class PlayerHealth : MonoBehaviour
 
         if (health == 0)
         {
-            Debug.Log("health is 0");
+            //Debug.Log("health is 0");
             logic.GameOver();
         }
     }
     public void UpdateHealthUI() 
     {
-        Debug.Log(health);
+        //Debug.Log(health);
         float fillFront = frontHealthBar.fillAmount;
         float fillBack = backHealthBar.fillAmount;
         float hFraction = health / maxHealth;

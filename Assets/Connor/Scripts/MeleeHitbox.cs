@@ -8,7 +8,9 @@ public class MeleeHitbox : MonoBehaviour
     public List<Collider> GetColliders () { return colliders; }
 
     private void OnTriggerEnter (Collider other) {
-        if (!colliders.Contains(other)) { colliders.Add(other); }
+        if (other.transform.tag == "Enemy") {
+            if (!colliders.Contains(other)) { colliders.Add(other); }
+        }
     }
 
     private void OnTriggerExit (Collider other) {
@@ -16,8 +18,10 @@ public class MeleeHitbox : MonoBehaviour
     }
 
     public void melee(int damage) {
+        Debug.Log("Melee");
         foreach (Collider c in colliders) {
-            if (c.tag == "Enemy") {
+            if (c != null && c.transform.tag == "Enemy") {
+                Debug.Log(c.transform.tag);
                 c.gameObject.GetComponent<EnemyHealthManager>().takeDamage(damage);
                 //GameObject particleSystem = Instantiate(particleSystemPrefab, hit.point, Quaternion.identity);
                 //Destroy(particleSystem, 2.0f); // Destroy the particle system after 2 seconds

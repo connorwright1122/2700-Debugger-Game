@@ -11,12 +11,15 @@ public class Projectile : MonoBehaviour
     private Vector3 directionToPlayer;
 
     private Transform playerTransform;
+
+    private GameObject player;
     
     // Start is called before the first frame update
     void Start() 
     {
         
-        playerTransform = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player");
+        playerTransform = player.transform;
 
         /*
         Vector3 directionToPlayer = playerTransform.position - transform.position;
@@ -50,12 +53,27 @@ public class Projectile : MonoBehaviour
 
 
     
+    /*
     private void OnCollisionEnter(Collision other) {
 
+        if (other.transform.tag == "Player") {
+            player.GetComponent<PlayerHealth>().TakeDamage(10);
+        }
+        
         if (other.transform.tag != "Enemy") {
             Destroy(this.gameObject);
         }
+    }
+    */
+
+    private void OnTriggerEnter (Collider other) {
+        if (other.transform.tag == "Player") {
+            player.GetComponent<PlayerHealth>().TakeDamage(10);
+        }
         
+        if (other.transform.tag != "Enemy" && other.transform.tag != "Melee") {
+            Destroy(this.gameObject);
+        }
     }
     
 }

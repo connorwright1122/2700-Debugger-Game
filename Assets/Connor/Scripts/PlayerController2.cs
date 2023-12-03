@@ -14,7 +14,7 @@ public class PlayerController2 : MonoBehaviour {
     private Camera _camera;
     private float xRotation = 0f;
 
-    private bool frozen = false;
+    public bool frozen = false;
 
 
     [SerializeField] private int _weaponType = 1;
@@ -23,10 +23,14 @@ public class PlayerController2 : MonoBehaviour {
 
     public GameObject menuPanel;
     public GameObject inputField;
+    public GameObject meleeImage;
+    public GameObject gunImage;
 
     public GameObject meleeHitbox;
 
     [SerializeField] public GameObject particleSystemPrefab;
+
+    public AudioManager audioManager;
 
 
 
@@ -43,6 +47,11 @@ public class PlayerController2 : MonoBehaviour {
         Debug.Log("No Character Controller Attached to Player");
 
         Cursor.lockState = CursorLockMode.Locked;
+        frozen = false;
+        Time.timeScale = 1f;
+
+        //audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
     }
 
     // Update is called once per frame
@@ -95,6 +104,7 @@ public class PlayerController2 : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.T)) {
             //menuPanel.SetActive(true); // Show the menu
+            Cursor.lockState = CursorLockMode.Confined;
             inputField.GetComponent<TMP_InputField>().Select(); // Focus the text field
             Time.timeScale = 0f; // Freeze the game
             frozen = true;
@@ -105,6 +115,7 @@ public class PlayerController2 : MonoBehaviour {
 
 
     private void Shoot() {
+        audioManager.PlayGunSound();
         Ray ray = _camera.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit)) {
@@ -124,6 +135,7 @@ public class PlayerController2 : MonoBehaviour {
     }
 
     private void Melee() {
+        audioManager.PlayPunchSound();
         meleeHitbox.GetComponent<MeleeHitbox>().melee(meleeDamage);
     }
 
@@ -134,15 +146,20 @@ public class PlayerController2 : MonoBehaviour {
 
         if (inputText == "melee()") {
             _weaponType = 2;
+            meleeImage.SetActive(true);
+            gunImage.SetActive(false);
             Debug.Log("Melee activated");
         } else if (inputText == "shoot()") {
             _weaponType = 1;
+            meleeImage.SetActive(false);
+            gunImage.SetActive(true);
             Debug.Log("Gun activated");
         } else {
             Debug.Log("Invalid weapon selection: " + inputText);
         }
 
         //menuPanel.SetActive(false); // Hide the menu
+        Cursor.lockState = CursorLockMode.Locked;
         inputField.GetComponent<TMP_InputField>().DeactivateInputField();
         //EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f; // Unfreeze the game

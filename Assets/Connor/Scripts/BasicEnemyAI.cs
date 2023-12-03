@@ -6,11 +6,13 @@ public class BasicEnemyAI : MonoBehaviour {
     public float rotationSpeed = 100.0f;
 
 
+    private GameObject player;
     private Transform playerTransform;
     //private Animator animator;
 
     void Start() {
-        playerTransform = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player");
+        playerTransform = player.transform;
         //animator = GetComponent<Animator>();
     }
 
@@ -33,6 +35,14 @@ public class BasicEnemyAI : MonoBehaviour {
             animator.SetBool("IsMoving", false);
         }
         */
+    }
+
+    private void OnCollisionEnter(Collision other) {
+
+        if (other.transform.tag == "Player") {
+            player.GetComponent<PlayerHealth>().TakeDamage(10);
+        }
+        
     }
 
     

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Logic
+  - Melee
+  - Boss
   layers:
   - Default
   - TransparentFX
