@@ -100,6 +100,11 @@ public class PlayerHealth : MonoBehaviour
         }
 
     }
+    
+    public void UsePowerBar()
+    {
+        
+    }
 
     public void TakeDamage(float damage)
     {
