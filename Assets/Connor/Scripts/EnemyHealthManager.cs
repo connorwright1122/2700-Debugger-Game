@@ -28,7 +28,7 @@ public class EnemyHealthManager : MonoBehaviour
         if (health <= 0) {
             player.GetComponent<PlayerHealth>().RestoreHealth(10);
             if (isBoss) {
-                player.GetComponentInChildren<LogicScript>().GameOver();
+                player.GetComponentInChildren<LogicScript>().GameWin();
             }
             Destroy(this.gameObject);
         }

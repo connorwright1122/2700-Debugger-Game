@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource gunAudioSource;
     public AudioSource punchAudioSource;
+    //public AudioSource soundTrackAudioSource;
 
     public void PlayGunSound()
     {
@@ -15,4 +16,9 @@ public class AudioManager : MonoBehaviour
     {
         punchAudioSource.Play();
     }
+    
+    /* public void PlaySoundtrack()
+    {
+        soundTrackAudioSource.Play();
+    } */
 }
